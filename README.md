@@ -4,7 +4,9 @@
 
 ## 🌐 公開URL
 
-**GitHub Pages**: [https://<username>.github.io/talent-market-monitor/](公開後にURLを記載)
+**GitHub Pages**: https://&lt;username&gt;.github.io/talent-market-monitor/
+
+（公開後、上記の `<username>` をあなたのGitHubユーザー名に置き換えてください）
 
 ## 📊 監視対象企業
 
@@ -33,21 +35,20 @@
 ### サイト表示
 ```bash
 cd talent-management-monitor
-open public/index.html
+open index.html
 ```
 
-ブラウザで `public/index.html` を開くだけで閲覧できます。
+ブラウザで `index.html` を開くだけで閲覧できます。
 
 ## 📂 ファイル構成
 
 ```
 talent-market-monitor/
-├── public/
-│   ├── index.html              # メインサイト
-│   ├── sample-data.js          # 企業データ（カオナビ、タレントパレット等の詳細分析含む）
-│   └── terminology-guide.svg   # 専門用語説明図解
-├── .gitignore                  # Git除外ファイル
-└── README.md                   # このファイル
+├── index.html              # メインサイト
+├── sample-data.js          # 企業データ（カオナビ、タレントパレット等の詳細分析含む）
+├── terminology-guide.svg   # 専門用語説明図解
+├── .gitignore              # Git除外ファイル
+└── README.md               # このファイル
 ```
 
 ## 🌐 GitHub Pagesへのデプロイ方法
@@ -71,12 +72,17 @@ git push -u origin main
 1. GitHubリポジトリページの **Settings** タブを開く
 2. 左サイドバーから **Pages** を選択
 3. **Source** で `main` ブランチを選択
-4. **Folder** で `/root` または `/public` を選択（推奨: `/public`）
+4. **Folder** で `/ (root)` を選択
 5. **Save** をクリック
 
 数分後、以下のURLで公開されます:
 ```
 https://<your-username>.github.io/talent-market-monitor/
+```
+
+または直接:
+```
+https://<your-username>.github.io/talent-market-monitor/index.html
 ```
 
 **カスタムドメインを使用する場合:**
