@@ -1,0 +1,170 @@
+<svg width="900" height="800" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="900" height="800" fill="#f8fafc"/>
+
+  <!-- タイトル -->
+  <text x="450" y="40" fill="#1e293b" font-size="24" font-weight="bold" text-anchor="middle" font-family="Arial, sans-serif">
+    監視システムで使用する専門用語の説明
+  </text>
+
+  <!-- ブラウザウィンドウの外枠 -->
+  <rect x="50" y="80" width="800" height="630" fill="white" stroke="#cbd5e1" stroke-width="3" rx="8"/>
+
+  <!-- ブラウザのタブバー -->
+  <rect x="50" y="80" width="800" height="40" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="3" rx="8"/>
+  <rect x="50" y="100" width="800" height="20" fill="#e2e8f0"/>
+
+  <!-- ブラウザタブ -->
+  <rect x="70" y="85" width="200" height="30" fill="white" stroke="#94a3b8" stroke-width="1" rx="4"/>
+  <text x="80" y="105" fill="#475569" font-size="12" font-family="Arial, sans-serif">
+    タレントパレット | 24年度シェア...
+  </text>
+
+  <!-- タイトルの説明矢印と枠 -->
+  <line x1="280" y1="100" x2="350" y2="100" stroke="#ef4444" stroke-width="2" marker-end="url(#arrowred)"/>
+  <rect x="355" y="75" width="200" height="50" fill="#fef2f2" stroke="#ef4444" stroke-width="2" rx="4"/>
+  <text x="365" y="93" fill="#dc2626" font-size="13" font-weight="bold" font-family="Arial, sans-serif">
+    ① タイトル
+  </text>
+  <text x="365" y="110" fill="#7f1d1d" font-size="11" font-family="Arial, sans-serif">
+    &lt;title&gt;タグ
+  </text>
+  <text x="365" y="122" fill="#7f1d1d" font-size="10" font-family="Arial, sans-serif">
+    ブラウザタブに表示
+  </text>
+
+  <!-- アドレスバー -->
+  <rect x="60" y="128" width="780" height="32" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" rx="4"/>
+  <text x="70" y="148" fill="#64748b" font-size="12" font-family="Arial, sans-serif">
+    https://www.pa-consul.co.jp/talentpalette/
+  </text>
+
+  <!-- Webページコンテンツエリア -->
+  <rect x="60" y="170" width="780" height="530" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- ヘッダー部分 -->
+  <rect x="60" y="170" width="780" height="60" fill="#3b82f6"/>
+  <text x="450" y="205" fill="white" font-size="20" font-weight="bold" text-anchor="middle" font-family="Arial, sans-serif">
+    タレントパレット
+  </text>
+  <text x="120" y="205" fill="white" font-size="12" font-family="Arial, sans-serif">
+    サービス | 料金 | 導入事例
+  </text>
+
+  <!-- メインコンテンツエリア全体を囲む枠 -->
+  <rect x="65" y="235" width="770" height="460" fill="none" stroke="#10b981" stroke-width="4" stroke-dasharray="8,4" rx="6"/>
+
+  <!-- メインコンテンツのラベル -->
+  <rect x="580" y="220" width="250" height="90" fill="#f0fdf4" stroke="#10b981" stroke-width="3" rx="4"/>
+  <text x="590" y="240" fill="#166534" font-size="14" font-weight="bold" font-family="Arial, sans-serif">
+    ③ メインコンテンツ
+  </text>
+  <text x="590" y="258" fill="#14532d" font-size="10" font-family="Arial, sans-serif">
+    この緑の点線枠内すべてが
+  </text>
+  <text x="590" y="272" fill="#14532d" font-size="10" font-family="Arial, sans-serif">
+    「メインコンテンツ」に該当
+  </text>
+  <text x="590" y="286" fill="#14532d" font-size="10" font-family="Arial, sans-serif">
+    ・ファーストビュー
+  </text>
+  <text x="590" y="300" fill="#14532d" font-size="10" font-family="Arial, sans-serif">
+    ・見出し(h1,h2,h3)
+  </text>
+
+  <!-- ファーストビュー（メインビジュアルエリア） -->
+  <rect x="80" y="250" width="740" height="180" fill="#f0f9ff" stroke="#bfdbfe" stroke-width="2" rx="6"/>
+
+  <!-- h1メインキャッチコピー -->
+  <text x="450" y="290" fill="#1e40af" font-size="18" font-weight="bold" text-anchor="middle" font-family="Arial, sans-serif">
+    大きな組織に、攻めの人事を。
+  </text>
+
+  <!-- サブテキスト -->
+  <text x="450" y="320" fill="#475569" font-size="14" text-anchor="middle" font-family="Arial, sans-serif">
+    タレントマネジメントシステムで
+  </text>
+  <text x="450" y="340" fill="#475569" font-size="14" text-anchor="middle" font-family="Arial, sans-serif">
+    データを活用した科学的人事を実現
+  </text>
+
+  <!-- CTAボタン -->
+  <rect x="340" y="360" width="100" height="35" fill="#10b981" rx="6"/>
+  <text x="390" y="382" fill="white" font-size="13" text-anchor="middle" font-family="Arial, sans-serif">
+    資料請求
+  </text>
+  <rect x="460" y="360" width="100" height="35" fill="#f59e0b" rx="6"/>
+  <text x="510" y="382" fill="white" font-size="13" text-anchor="middle" font-family="Arial, sans-serif">
+    デモ体験
+  </text>
+
+  <!-- 本文セクション1 -->
+  <rect x="80" y="450" width="740" height="80" fill="white" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+  <text x="90" y="470" fill="#1e293b" font-size="14" font-weight="bold" font-family="Arial, sans-serif">
+    経験と勘から、データを活用した科学的人事を実現！
+  </text>
+  <text x="90" y="490" fill="#64748b" font-size="11" font-family="Arial, sans-serif">
+    人事に必要な機能がオールインワン「人事DX」と「科学的人事」を実現する
+  </text>
+  <text x="90" y="510" fill="#64748b" font-size="11" font-family="Arial, sans-serif">
+    導入実績4,300社以上、継続率99.6%のタレントマネジメントシステムです。
+  </text>
+
+  <!-- 本文セクション2 -->
+  <rect x="80" y="550" width="740" height="60" fill="white" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+  <text x="90" y="570" fill="#1e293b" font-size="14" font-weight="bold" font-family="Arial, sans-serif">
+    主な機能：人材配置、評価管理、育成計画
+  </text>
+  <text x="90" y="590" fill="#64748b" font-size="11" font-family="Arial, sans-serif">
+    AIによる最適配置提案、360度評価、スキルマップ可視化など
+  </text>
+
+  <!-- 本文セクション3 -->
+  <rect x="80" y="630" width="740" height="50" fill="white" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+  <text x="90" y="650" fill="#1e293b" font-size="14" font-weight="bold" font-family="Arial, sans-serif">
+    導入企業の声
+  </text>
+  <text x="90" y="668" fill="#64748b" font-size="11" font-family="Arial, sans-serif">
+    「人事業務の工数が50%削減されました」 - A社人事部長
+  </text>
+
+  <!-- 説明文（meta description）の説明 -->
+  <rect x="580" y="330" width="240" height="90" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="4"/>
+  <text x="590" y="348" fill="#92400e" font-size="13" font-weight="bold" font-family="Arial, sans-serif">
+    ② 説明文
+  </text>
+  <text x="590" y="365" fill="#78350f" font-size="10" font-family="Arial, sans-serif">
+    &lt;meta description&gt;タグ
+  </text>
+  <text x="590" y="379" fill="#78350f" font-size="10" font-family="Arial, sans-serif">
+    Google検索結果ページに表示
+  </text>
+  <text x="590" y="393" fill="#78350f" font-size="10" font-family="Arial, sans-serif">
+    されるサイトの要約文。
+  </text>
+  <text x="590" y="407" fill="#78350f" font-size="10" font-family="Arial, sans-serif">
+    SEO対策で最重要の要素。
+  </text>
+
+  <!-- 矢印マーカー定義 -->
+  <defs>
+    <marker id="arrowred" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ef4444"/>
+    </marker>
+  </defs>
+
+  <!-- 補足説明エリア -->
+  <rect x="50" y="720" width="800" height="70" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" rx="4"/>
+  <text x="60" y="740" fill="#1e40af" font-size="11" font-weight="bold" font-family="Arial, sans-serif">
+    💡 重要ポイント
+  </text>
+  <text x="60" y="755" fill="#1e3a8a" font-size="10" font-family="Arial, sans-serif">
+    • メインコンテンツ = ヘッダー・フッターを除いた本文全体（ファーストビュー + すべてのセクション）
+  </text>
+  <text x="60" y="768" fill="#1e3a8a" font-size="10" font-family="Arial, sans-serif">
+    • このシステムでは、①タイトル・②説明文・③メインコンテンツの変更を監視し、HP更新・SEO対策・広告戦略の変化を追跡。
+  </text>
+  <text x="60" y="781" fill="#1e3a8a" font-size="10" font-family="Arial, sans-serif">
+    • 各要素の変更は競合他社のマーケティング戦略の方向性を示す重要な指標となります。
+  </text>
+</svg>
