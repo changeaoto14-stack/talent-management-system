@@ -19,9 +19,30 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 20px;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            .chatbot-sidebar {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 350px;
+                max-height: 500px;
+                z-index: 1000;
+            }
         }
         
         .header {
@@ -661,7 +682,39 @@
                         🌐 ${selectedCompany.name} のサイトを見る
                     </a>
                 </div>
-                
+
+                <!-- 証拠・データソース -->
+                ${selectedCompany.evidenceSources ? `
+                    <div style="margin-bottom: 20px; padding: 15px; background: #ecfdf5; border-radius: 8px; border: 1px solid #10b981;">
+                        <h4 style="margin-bottom: 10px; color: #047857; font-weight: 600;">🔍 データの信頼性</h4>
+                        <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
+                            <div style="font-size: 12px; color: #059669; line-height: 1.8;">
+                                <div style="margin-bottom: 8px;">
+                                    <strong>📅 データ取得日時:</strong> ${escapeHtml(selectedCompany.evidenceSources.retrievalDate)}
+                                </div>
+                                <div style="margin-bottom: 8px;">
+                                    <strong>🌐 取得元URL:</strong>
+                                    <a href="${escapeHtml(selectedCompany.evidenceSources.sourceUrl)}" target="_blank"
+                                       style="color: #059669; text-decoration: underline;">
+                                        ${escapeHtml(selectedCompany.evidenceSources.sourceUrl)}
+                                    </a>
+                                </div>
+                                <div style="margin-bottom: 8px;">
+                                    <strong>⚙️ 取得方法:</strong> ${escapeHtml(selectedCompany.evidenceSources.verificationMethod)}
+                                </div>
+                            </div>
+                        </div>
+                        <div style="background: white; padding: 12px; border-radius: 6px;">
+                            <div style="font-weight: 600; color: #047857; margin-bottom: 8px; font-size: 13px;">✅ 確認済みデータポイント</div>
+                            <ul style="margin: 0; padding-left: 20px; color: #065f46; font-size: 12px; line-height: 1.8;">
+                                ${selectedCompany.evidenceSources.dataPoints.map(point =>
+                                    `<li>${escapeHtml(point)}</li>`
+                                ).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                ` : ''}
+
                 <!-- 変更カテゴリ -->
                 ${changesHtml ? `
                     <div style="margin-bottom: 20px; padding: 15px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
@@ -802,6 +855,23 @@
                                                 <div style="background: #eff6ff; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #3b82f6;">
                                                     <div style="font-weight: 700; color: #1e40af; margin-bottom: 10px; font-size: 15px;">🎯 ターゲット層</div>
                                                     <div style="color: #1e3a8a; font-size: 13px;">${escapeHtml(change.detailedAnalysis.targetAudience)}</div>
+                                                </div>
+                                            ` : ''}
+
+                                            ${change.detailedAnalysis.reasoning ? `
+                                                <div style="background: #fefce8; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #eab308;">
+                                                    <div style="font-weight: 700; color: #a16207; margin-bottom: 10px; font-size: 15px;">🧠 考察の根拠</div>
+                                                    ${Object.entries(change.detailedAnalysis.reasoning).map(([key, value]) => `
+                                                        <div style="margin-bottom: 12px; background: white; padding: 10px; border-radius: 4px;">
+                                                            <div style="font-weight: 600; color: #854d0e; margin-bottom: 5px; font-size: 12px; text-transform: uppercase;">
+                                                                ${key === 'marketPosition' ? '📊 市場ポジション分析' :
+                                                                  key === 'messagingStrategy' ? '💬 メッセージング戦略' :
+                                                                  key === 'targetInsight' ? '🎯 ターゲット洞察' :
+                                                                  key === 'competitiveAnalysis' ? '⚔️ 競合比較' : key}
+                                                            </div>
+                                                            <div style="color: #78350f; font-size: 12px; line-height: 1.7;">${escapeHtml(value)}</div>
+                                                        </div>
+                                                    `).join('')}
                                                 </div>
                                             ` : ''}
 
