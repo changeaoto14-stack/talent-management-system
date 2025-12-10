@@ -461,34 +461,9 @@
         }
 
         .chatbot-input-area {
-            padding: 15px;
+            padding: 20px;
             background: #f8fafc;
             border-top: 1px solid #e2e8f0;
-        }
-
-        .chatbot-quick-questions {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .quick-question-btn {
-            background: white;
-            border: 1px solid #e2e8f0;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 13px;
-            color: #1e293b;
-            text-align: left;
-            transition: all 0.2s;
-        }
-
-        .quick-question-btn:hover {
-            background: #f0f9ff;
-            border-color: #3b82f6;
-            color: #3b82f6;
         }
 
         .chatbot-input {
@@ -572,35 +547,23 @@
                 <div class="loading">データを読み込んでいます...</div>
             </div>
         </div>
-    </div>
 
-                </div> <!-- メインコンテンツ終了 -->
+            </div> <!-- メインコンテンツ終了 -->
 
-                <!-- チャットボットサイドバー -->
-                <div class="chatbot-sidebar">
-                    <div class="chatbot-header">
-                        💬 質問アシスタント
-                    </div>
-                    <div class="chatbot-messages" id="chatMessages">
-                        <div class="chat-message bot">
-                            こんにちは！タレントマネジメント業界の変化追跡システムについて、お気軽にご質問ください。
-                        </div>
-                    </div>
-                    <div class="chatbot-input-area">
-                        <div class="chatbot-quick-questions">
-                            <button class="quick-question-btn" onclick="handleQuickQuestion('データの信頼性はどうですか？')">
-                                💎 データの信頼性は？
-                            </button>
-                            <button class="quick-question-btn" onclick="handleQuickQuestion('カオナビの戦略は？')">
-                                🎯 カオナビの戦略は？
-                            </button>
-                            <button class="quick-question-btn" onclick="handleQuickQuestion('競合他社との違いは？')">
-                                ⚔️ 競合との違いは？
-                            </button>
-                        </div>
-                        <textarea id="chatInput" class="chatbot-input" rows="2" placeholder="質問を入力..." onkeypress="handleChatKeyPress(event)"></textarea>
+            <!-- チャットボットサイドバー -->
+            <div class="chatbot-sidebar">
+                <div class="chatbot-header">
+                    💬 質問アシスタント
+                </div>
+                <div class="chatbot-messages" id="chatMessages">
+                    <div class="chat-message bot">
+                        こんにちは！タレントマネジメント業界の変化追跡システムについて、お気軽にご質問ください。
                     </div>
                 </div>
+                <div class="chatbot-input-area">
+                    <textarea id="chatInput" class="chatbot-input" rows="3" placeholder="質問を入力してEnterキーを押してください..." onkeypress="handleChatKeyPress(event)"></textarea>
+                </div>
+            </div>
 
             </div> <!-- main-layout終了 -->
     </div> <!-- container終了 -->
@@ -1242,7 +1205,124 @@
         // 初期化
         document.addEventListener('DOMContentLoaded', loadData);
 
-        // チャットボット機能
+        // チャットボット機能 - 実データから検索して回答
+        function searchInData(question) {
+            const lowerQuestion = question.toLowerCase();
+            let results = [];
+
+            // 企業名を抽出
+            const companyNames = companies.map(c => c.name);
+            const mentionedCompanies = companyNames.filter(name =>
+                lowerQuestion.includes(name.toLowerCase().replace(/📖|【|】/g, ''))
+            );
+
+            // 企業別の情報を検索
+            companies.forEach(company => {
+                if (company.isGuide) return; // ガイドはスキップ
+
+                const companyName = company.name.toLowerCase();
+                const isRelevant = lowerQuestion.includes(companyName) || mentionedCompanies.length === 0;
+
+                if (isRelevant) {
+                    // タイトル・説明文の検索
+                    if (company.current_title && (lowerQuestion.includes('タイトル') || lowerQuestion.includes('title'))) {
+                        results.push({
+                            type: '現在のタイトル',
+                            company: company.name,
+                            content: company.current_title
+                        });
+                    }
+
+                    if (company.current_description && (lowerQuestion.includes('説明') || lowerQuestion.includes('description'))) {
+                        results.push({
+                            type: '現在の説明文',
+                            company: company.name,
+                            content: company.current_description
+                        });
+                    }
+
+                    // 証拠データの検索
+                    if (company.evidenceSources && (lowerQuestion.includes('証拠') || lowerQuestion.includes('データ') || lowerQuestion.includes('信頼'))) {
+                        results.push({
+                            type: 'データの信頼性',
+                            company: company.name,
+                            content: `取得日時: ${company.evidenceSources.retrievalDate}\n取得元: ${company.evidenceSources.sourceUrl}\n取得方法: ${company.evidenceSources.verificationMethod}\n\n確認済みデータ:\n${company.evidenceSources.dataPoints.map(p => `• ${p}`).join('\n')}`
+                        });
+                    }
+
+                    // 変更詳細の検索
+                    if (company.changes && company.changes.length > 0) {
+                        company.changes.forEach(change => {
+                            if (!change.detailedAnalysis) return;
+
+                            const analysis = change.detailedAnalysis;
+
+                            // 戦略・ポジショニング
+                            if (lowerQuestion.includes('戦略') || lowerQuestion.includes('ポジション')) {
+                                results.push({
+                                    type: '戦略分析',
+                                    company: company.name,
+                                    category: change.category,
+                                    content: `変更タイプ: ${analysis.changeType}\n\n具体的な変更:\n${analysis.whatChanged.map(c => `• ${c}`).join('\n')}\n\nビジネスインパクト:\n${analysis.businessImpact}`
+                                });
+                            }
+
+                            // 考察の根拠
+                            if (analysis.reasoning && (lowerQuestion.includes('根拠') || lowerQuestion.includes('なぜ') || lowerQuestion.includes('理由'))) {
+                                const reasoningText = Object.entries(analysis.reasoning).map(([key, value]) => {
+                                    const label = key === 'marketPosition' ? '市場ポジション分析' :
+                                                key === 'messagingStrategy' ? 'メッセージング戦略' :
+                                                key === 'targetInsight' ? 'ターゲット洞察' :
+                                                key === 'competitiveAnalysis' ? '競合比較' : key;
+                                    return `【${label}】\n${value}`;
+                                }).join('\n\n');
+
+                                results.push({
+                                    type: '考察の根拠',
+                                    company: company.name,
+                                    category: change.category,
+                                    content: reasoningText
+                                });
+                            }
+
+                            // 競合分析
+                            if (lowerQuestion.includes('競合') || lowerQuestion.includes('比較') || lowerQuestion.includes('違い')) {
+                                results.push({
+                                    type: '競合状況分析',
+                                    company: company.name,
+                                    category: change.category,
+                                    content: analysis.competitiveContext
+                                });
+                            }
+
+                            // ターゲット層
+                            if (analysis.targetAudience && (lowerQuestion.includes('ターゲット') || lowerQuestion.includes('対象'))) {
+                                results.push({
+                                    type: 'ターゲット層',
+                                    company: company.name,
+                                    category: change.category,
+                                    content: analysis.targetAudience
+                                });
+                            }
+
+                            // SEO戦略
+                            if (analysis.seoStrategy && (lowerQuestion.includes('seo') || lowerQuestion.includes('検索') || lowerQuestion.includes('キーワード'))) {
+                                const seo = analysis.seoStrategy;
+                                results.push({
+                                    type: 'SEO戦略',
+                                    company: company.name,
+                                    category: change.category,
+                                    content: `ターゲットキーワード:\n${seo.targetKeywords.map(k => `• ${k}`).join('\n')}\n\n期待される効果:\n${seo.expectedImpact}`
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+
+            return results;
+        }
+
         function sendChatMessage(question) {
             const messagesContainer = document.getElementById('chatMessages');
 
@@ -1252,30 +1332,33 @@
             userMsg.textContent = question;
             messagesContainer.appendChild(userMsg);
 
-            // 簡易的なFAQ応答
-            let answer = '';
-            const lowerQuestion = question.toLowerCase();
+            // データから情報を検索
+            const searchResults = searchInData(question);
 
-            if (lowerQuestion.includes('データ') && (lowerQuestion.includes('信頼') || lowerQuestion.includes('正確'))) {
-                answer = '各企業のデータは、WebFetch APIを使用して実際のサイトから取得しています。データ取得日時と取得元URLは各企業の「🔍 データの信頼性」セクションでご確認いただけます。';
-            } else if (lowerQuestion.includes('変更') || lowerQuestion.includes('更新')) {
-                answer = '企業の変更情報は、定期的に各社の公式サイトをチェックし、タイトル、説明文、メインコンテンツの変化を追跡しています。各変更には詳細な考察と根拠が含まれています。';
-            } else if (lowerQuestion.includes('カオナビ')) {
-                answer = 'カオナビは【シェアNo.1】を前面に押し出した信頼性重視のポジショニングを取っています。「個性・才能を発掘」という人間中心のメッセージで、競合他社との差別化を図っています。';
-            } else if (lowerQuestion.includes('タレントパレット')) {
-                answer = 'タレントパレットは「24年度シェアNo.1」を訴求し、AIコーチングなど6種類のAI機能を展開。「大きな組織に、攻めの人事を。」というメッセージで、大企業向けに科学的人事を提案しています。';
-            } else if (lowerQuestion.includes('競合') || lowerQuestion.includes('違い')) {
-                answer = 'カオナビは「シェアNo.1」と社会的証明を重視、タレントパレットは「AI機能」を全面展開、SmartHRは「労務DX」に特化しています。各社が異なる切り口で市場にアプローチしています。';
-            } else if (lowerQuestion.includes('根拠') || lowerQuestion.includes('なぜ')) {
-                answer = '各分析の考察根拠は「🧠 考察の根拠」セクションに詳しく記載されています。市場ポジション分析、メッセージング戦略、ターゲット洞察、競合比較の4つの視点から分析しています。';
+            // 回答を生成
+            let answer = '';
+            if (searchResults.length > 0) {
+                // 結果を整形して表示（最大3件）
+                const limitedResults = searchResults.slice(0, 3);
+                answer = limitedResults.map((result, index) => {
+                    let text = `【${result.company}】${result.type}`;
+                    if (result.category) text += ` (${result.category})`;
+                    text += `\n\n${result.content}`;
+                    return text;
+                }).join('\n\n━━━━━━━━━━━━\n\n');
+
+                if (searchResults.length > 3) {
+                    answer += `\n\n（他に${searchResults.length - 3}件の関連情報があります）`;
+                }
             } else {
-                answer = 'ご質問ありがとうございます。以下のトピックについてお答えできます：\n• データの信頼性と取得方法\n• 各企業の戦略分析\n• 競合比較\n• 考察の根拠\n\n具体的な質問をお願いします。';
+                answer = '申し訳ございません。ご質問に関連する情報が見つかりませんでした。\n\n以下のような質問に対応しています：\n• 特定企業の戦略について\n• データの信頼性や取得方法\n• 競合他社との比較\n• SEO戦略やキーワード\n• 考察の根拠や理由';
             }
 
             // ボットメッセージを表示
             setTimeout(() => {
                 const botMsg = document.createElement('div');
                 botMsg.className = 'chat-message bot';
+                botMsg.style.whiteSpace = 'pre-wrap';
                 botMsg.textContent = answer;
                 messagesContainer.appendChild(botMsg);
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -1284,10 +1367,6 @@
             // 入力欄をクリア
             document.getElementById('chatInput').value = '';
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function handleQuickQuestion(question) {
-            sendChatMessage(question);
         }
 
         function handleChatKeyPress(event) {
