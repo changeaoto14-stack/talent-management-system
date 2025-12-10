@@ -407,6 +407,104 @@
         .no-data p {
             font-size: 14px;
         }
+        /* チャットボットスタイル */
+        .chatbot-sidebar {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 700px;
+            position: sticky;
+            top: 20px;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 85%;
+            word-wrap: break-word;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .chat-message.bot {
+            background: #f0f9ff;
+            color: #1e40af;
+            align-self: flex-start;
+            border: 1px solid #bfdbfe;
+        }
+
+        .chat-message.user {
+            background: #3b82f6;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chatbot-input-area {
+            padding: 15px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .chatbot-quick-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .quick-question-btn {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #1e293b;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .quick-question-btn:hover {
+            background: #f0f9ff;
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .chatbot-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: none;
+            font-family: inherit;
+        }
+
+        .chatbot-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
     </style>
 </head>
 <body>
@@ -417,8 +515,11 @@
     </div>
 
     <div class="container">
-        <!-- コントロール -->
-        <div class="controls">
+        <div class="main-layout">
+            <!-- メインコンテンツ -->
+            <div>
+                <!-- コントロール -->
+                <div class="controls">
             <select id="companySelect" class="company-select">
                 <option value="">📊 すべての企業を表示</option>
             </select>
@@ -472,6 +573,37 @@
             </div>
         </div>
     </div>
+
+                </div> <!-- メインコンテンツ終了 -->
+
+                <!-- チャットボットサイドバー -->
+                <div class="chatbot-sidebar">
+                    <div class="chatbot-header">
+                        💬 質問アシスタント
+                    </div>
+                    <div class="chatbot-messages" id="chatMessages">
+                        <div class="chat-message bot">
+                            こんにちは！タレントマネジメント業界の変化追跡システムについて、お気軽にご質問ください。
+                        </div>
+                    </div>
+                    <div class="chatbot-input-area">
+                        <div class="chatbot-quick-questions">
+                            <button class="quick-question-btn" onclick="handleQuickQuestion('データの信頼性はどうですか？')">
+                                💎 データの信頼性は？
+                            </button>
+                            <button class="quick-question-btn" onclick="handleQuickQuestion('カオナビの戦略は？')">
+                                🎯 カオナビの戦略は？
+                            </button>
+                            <button class="quick-question-btn" onclick="handleQuickQuestion('競合他社との違いは？')">
+                                ⚔️ 競合との違いは？
+                            </button>
+                        </div>
+                        <textarea id="chatInput" class="chatbot-input" rows="2" placeholder="質問を入力..." onkeypress="handleChatKeyPress(event)"></textarea>
+                    </div>
+                </div>
+
+            </div> <!-- main-layout終了 -->
+    </div> <!-- container終了 -->
 
     <!-- サンプルデータを読み込み -->
     <script src="sample-data.js"></script>
@@ -1109,6 +1241,64 @@
 
         // 初期化
         document.addEventListener('DOMContentLoaded', loadData);
+
+        // チャットボット機能
+        function sendChatMessage(question) {
+            const messagesContainer = document.getElementById('chatMessages');
+
+            // ユーザーメッセージを表示
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-message user';
+            userMsg.textContent = question;
+            messagesContainer.appendChild(userMsg);
+
+            // 簡易的なFAQ応答
+            let answer = '';
+            const lowerQuestion = question.toLowerCase();
+
+            if (lowerQuestion.includes('データ') && (lowerQuestion.includes('信頼') || lowerQuestion.includes('正確'))) {
+                answer = '各企業のデータは、WebFetch APIを使用して実際のサイトから取得しています。データ取得日時と取得元URLは各企業の「🔍 データの信頼性」セクションでご確認いただけます。';
+            } else if (lowerQuestion.includes('変更') || lowerQuestion.includes('更新')) {
+                answer = '企業の変更情報は、定期的に各社の公式サイトをチェックし、タイトル、説明文、メインコンテンツの変化を追跡しています。各変更には詳細な考察と根拠が含まれています。';
+            } else if (lowerQuestion.includes('カオナビ')) {
+                answer = 'カオナビは【シェアNo.1】を前面に押し出した信頼性重視のポジショニングを取っています。「個性・才能を発掘」という人間中心のメッセージで、競合他社との差別化を図っています。';
+            } else if (lowerQuestion.includes('タレントパレット')) {
+                answer = 'タレントパレットは「24年度シェアNo.1」を訴求し、AIコーチングなど6種類のAI機能を展開。「大きな組織に、攻めの人事を。」というメッセージで、大企業向けに科学的人事を提案しています。';
+            } else if (lowerQuestion.includes('競合') || lowerQuestion.includes('違い')) {
+                answer = 'カオナビは「シェアNo.1」と社会的証明を重視、タレントパレットは「AI機能」を全面展開、SmartHRは「労務DX」に特化しています。各社が異なる切り口で市場にアプローチしています。';
+            } else if (lowerQuestion.includes('根拠') || lowerQuestion.includes('なぜ')) {
+                answer = '各分析の考察根拠は「🧠 考察の根拠」セクションに詳しく記載されています。市場ポジション分析、メッセージング戦略、ターゲット洞察、競合比較の4つの視点から分析しています。';
+            } else {
+                answer = 'ご質問ありがとうございます。以下のトピックについてお答えできます：\n• データの信頼性と取得方法\n• 各企業の戦略分析\n• 競合比較\n• 考察の根拠\n\n具体的な質問をお願いします。';
+            }
+
+            // ボットメッセージを表示
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'chat-message bot';
+                botMsg.textContent = answer;
+                messagesContainer.appendChild(botMsg);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 500);
+
+            // 入力欄をクリア
+            document.getElementById('chatInput').value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function handleQuickQuestion(question) {
+            sendChatMessage(question);
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                const input = document.getElementById('chatInput');
+                if (input.value.trim()) {
+                    sendChatMessage(input.value.trim());
+                }
+            }
+        }
     </script>
 </body>
 </html>
