@@ -669,80 +669,7 @@
                         ${changesHtml}
                     </div>
                 ` : ''}
-                
-                <!-- 具体的な変更箇所 -->
-                ${selectedCompany.screenshots?.highlights ? `
-                    <div style="margin-bottom: 30px;">
-                        <h3 style="margin-bottom: 15px; color: #1e293b; font-weight: 600;">🔍 具体的な変更箇所</h3>
-                        <div style="padding: 15px; background: #f0f9ff; border-radius: 8px; border: 1px solid #bfdbfe;">
-                            ${selectedCompany.screenshots.highlights.map((highlight, index) => {
-                                // ジャンルごとの色を取得(highlight.genreがあればそれを使用、なければデフォルトでHPの色)
-                                const genre = highlight.genre || 'HP';
-                                const highlightColor = genre === 'HP' ? '#10b981' :
-                                                     genre === 'SEO' ? '#f59e0b' :
-                                                     genre === 'AD' ? '#8b5cf6' : '#6b7280';
-                                const genreIcon = genre === 'HP' ? '🏠' :
-                                                genre === 'SEO' ? '🔍' :
-                                                genre === 'AD' ? '📺' : '📝';
 
-                                return `
-                                    <div style="margin-bottom: 10px; padding: 12px; background: white; border-radius: 6px; border-left: 4px solid ${highlightColor};">
-                                        <div style="font-weight: 600; color: #374151; margin-bottom: 5px;">
-                                            ${genreIcon} 変更箇所 ${index + 1}
-                                        </div>
-                                        <div style="color: #6b7280; font-size: 14px;">${escapeHtml(highlight.description)}</div>
-                                        <div style="color: #9ca3af; font-size: 12px; margin-top: 5px;">
-                                            座標: x=${highlight.coords.x}, y=${highlight.coords.y}, 幅=${highlight.coords.width}, 高さ=${highlight.coords.height}
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>
-                ` : ''}
-
-                <!-- テキスト比較セクション -->
-                <div>
-                    <h3 style="margin-bottom: 15px; color: #1e293b; font-weight: 600;">📝 テキスト変更比較</h3>
-                    <div class="comparison-view">
-                        <div class="comparison-card previous">
-                            <div class="comparison-header previous">変更前のテキスト</div>
-                            <div class="comparison-content">
-                                <div class="comparison-item">
-                                    <div class="comparison-label">タイトル</div>
-                                    <div class="comparison-text">${escapeHtml(selectedCompany.previous_title || 'データなし')}</div>
-                                </div>
-                                <div class="comparison-item">
-                                    <div class="comparison-label">説明文</div>
-                                    <div class="comparison-text">${escapeHtml(selectedCompany.previous_description || 'データなし')}</div>
-                                </div>
-                                <div class="comparison-item">
-                                    <div class="comparison-label">メインコンテンツ</div>
-                                    <div class="comparison-text">${escapeHtml(selectedCompany.previous_content || 'データなし')}</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="comparison-card current">
-                            <div class="comparison-header current">変更後のテキスト</div>
-                            <div class="comparison-content">
-                                <div class="comparison-item">
-                                    <div class="comparison-label">タイトル</div>
-                                    <div class="comparison-text">${escapeHtml(selectedCompany.current_title || 'データなし')}</div>
-                                </div>
-                                <div class="comparison-item">
-                                    <div class="comparison-label">説明文</div>
-                                    <div class="comparison-text">${escapeHtml(selectedCompany.current_description || 'データなし')}</div>
-                                </div>
-                                <div class="comparison-item">
-                                    <div class="comparison-label">メインコンテンツ</div>
-                                    <div class="comparison-text">${escapeHtml(selectedCompany.current_content || 'データなし')}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
                 <!-- 詳細な変更履歴 -->
                 ${selectedCompany.changes && selectedCompany.changes.length > 0 ? `
                     <div style="margin-top: 20px; padding: 15px; background: #f0f9ff; border-radius: 8px; border: 1px solid #bfdbfe;">
@@ -932,8 +859,76 @@
                         }).join('')}
                     </div>
                 ` : ''}
+
+                <!-- テキスト変更比較 -->
+                ${(selectedCompany.current_title || selectedCompany.previous_title ||
+                   selectedCompany.current_description || selectedCompany.previous_description ||
+                   selectedCompany.current_content || selectedCompany.previous_content) ? `
+                    <div style="margin-top: 30px;">
+                        <h3 style="margin-bottom: 15px; color: #1e293b; font-weight: 600;">📝 テキスト変更比較</h3>
+                        <div class="comparison-view">
+                            <div class="comparison-card current">
+                                <div class="comparison-header current">変更後のテキスト</div>
+                                <div class="comparison-content">
+                                    ${selectedCompany.current_title ? `
+                                        <div class="comparison-item">
+                                            <div class="comparison-label">タイトル</div>
+                                            <div class="comparison-text">${escapeHtml(selectedCompany.current_title)}</div>
+                                        </div>
+                                    ` : ''}
+                                    ${selectedCompany.current_description ? `
+                                        <div class="comparison-item">
+                                            <div class="comparison-label">説明文</div>
+                                            <div class="comparison-text">${escapeHtml(selectedCompany.current_description)}</div>
+                                        </div>
+                                    ` : ''}
+                                    ${selectedCompany.current_content ? `
+                                        <div class="comparison-item">
+                                            <div class="comparison-label">メインコンテンツ</div>
+                                            <div class="comparison-text">${escapeHtml(selectedCompany.current_content)}</div>
+                                        </div>
+                                    ` : ''}
+                                    ${!selectedCompany.current_title && !selectedCompany.current_description && !selectedCompany.current_content ? `
+                                        <div style="text-align: center; padding: 20px; color: #64748b;">
+                                            変更後のデータがありません
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+
+                            <div class="comparison-card previous">
+                                <div class="comparison-header previous">変更前のテキスト</div>
+                                <div class="comparison-content">
+                                    ${selectedCompany.previous_title ? `
+                                        <div class="comparison-item">
+                                            <div class="comparison-label">タイトル</div>
+                                            <div class="comparison-text">${escapeHtml(selectedCompany.previous_title)}</div>
+                                        </div>
+                                    ` : ''}
+                                    ${selectedCompany.previous_description ? `
+                                        <div class="comparison-item">
+                                            <div class="comparison-label">説明文</div>
+                                            <div class="comparison-text">${escapeHtml(selectedCompany.previous_description)}</div>
+                                        </div>
+                                    ` : ''}
+                                    ${selectedCompany.previous_content ? `
+                                        <div class="comparison-item">
+                                            <div class="comparison-label">メインコンテンツ</div>
+                                            <div class="comparison-text">${escapeHtml(selectedCompany.previous_content)}</div>
+                                        </div>
+                                    ` : ''}
+                                    ${!selectedCompany.previous_title && !selectedCompany.previous_description && !selectedCompany.previous_content ? `
+                                        <div style="text-align: center; padding: 20px; color: #64748b;">
+                                            変更前のデータがありません
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
             `;
-            
+
             section.style.display = 'block';
         }
 
