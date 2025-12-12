@@ -775,47 +775,47 @@
                                     </div>
 
                                     ${change.detailedAnalysis ? `
-                                        <div id="detail-${changeIndex}" style="display: none; padding: 15px; border-top: 1px solid #e2e8f0;">
-                                            <div style="background: #fffbeb; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #f59e0b;">
-                                                <div style="font-weight: 700; color: #92400e; margin-bottom: 10px; font-size: 15px;">🎯 変更タイプ</div>
-                                                <div style="color: #78350f; font-size: 14px;">${escapeHtml(change.detailedAnalysis.changeType)}</div>
+                                        <div id="detail-${changeIndex}" style="display: none; padding: 25px; border-top: 2px solid #e2e8f0; background: #fafafa;">
+                                            <div style="background: #fffbeb; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #f59e0b; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                <div style="font-weight: 700; color: #92400e; margin-bottom: 12px; font-size: 17px;">🎯 変更タイプ</div>
+                                                <div style="color: #78350f; font-size: 15px; line-height: 1.8;">${escapeHtml(change.detailedAnalysis.changeType)}</div>
                                             </div>
 
-                                            <div style="background: #f0fdf4; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #10b981;">
-                                                <div style="font-weight: 700; color: #166534; margin-bottom: 10px; font-size: 15px;">📝 具体的な変更内容</div>
-                                                <ul style="margin: 0; padding-left: 20px; color: #14532d;">
+                                            <div style="background: #f0fdf4; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #10b981; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                <div style="font-weight: 700; color: #166534; margin-bottom: 12px; font-size: 17px;">📝 具体的な変更内容</div>
+                                                <ul style="margin: 0; padding-left: 24px; color: #14532d;">
                                                     ${change.detailedAnalysis.whatChanged.map(item =>
-                                                        `<li style="margin-bottom: 6px; font-size: 13px;">${escapeHtml(item)}</li>`
+                                                        `<li style="margin-bottom: 10px; font-size: 15px; line-height: 1.8;">${escapeHtml(item)}</li>`
                                                     ).join('')}
                                                 </ul>
                                             </div>
 
                                             ${change.detailedAnalysis.seoStrategy ? `
-                                                <div style="background: #fef3c7; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #f59e0b;">
-                                                    <div style="font-weight: 700; color: #92400e; margin-bottom: 10px; font-size: 15px;">🔍 SEO戦略詳細</div>
+                                                <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #f59e0b; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                    <div style="font-weight: 700; color: #92400e; margin-bottom: 15px; font-size: 17px;">🔍 SEO戦略詳細</div>
 
-                                                    <div style="margin-bottom: 12px;">
-                                                        <div style="font-weight: 600; color: #78350f; margin-bottom: 5px; font-size: 13px;">ターゲットキーワード</div>
-                                                        <ul style="margin: 0; padding-left: 20px; color: #78350f;">
+                                                    <div style="margin-bottom: 16px;">
+                                                        <div style="font-weight: 600; color: #78350f; margin-bottom: 8px; font-size: 15px;">ターゲットキーワード</div>
+                                                        <ul style="margin: 0; padding-left: 24px; color: #78350f;">
                                                             ${change.detailedAnalysis.seoStrategy.targetKeywords.map(kw =>
-                                                                `<li style="margin-bottom: 4px; font-size: 12px;">${escapeHtml(kw)}</li>`
+                                                                `<li style="margin-bottom: 8px; font-size: 14px; line-height: 1.8;">${escapeHtml(kw)}</li>`
                                                             ).join('')}
                                                         </ul>
                                                     </div>
 
-                                                    <div style="margin-bottom: 12px;">
-                                                        <div style="font-weight: 600; color: #78350f; margin-bottom: 5px; font-size: 13px;">キーワード配置戦略</div>
-                                                        <div style="font-size: 12px; color: #78350f; line-height: 1.6;">
-                                                            • Title: ${escapeHtml(change.detailedAnalysis.seoStrategy.keywordPlacement.titleTag)}<br>
-                                                            • Meta Description: ${escapeHtml(change.detailedAnalysis.seoStrategy.keywordPlacement.metaDescription)}<br>
-                                                            • H1: ${escapeHtml(change.detailedAnalysis.seoStrategy.keywordPlacement.h1Tag)}<br>
-                                                            • Body: ${escapeHtml(change.detailedAnalysis.seoStrategy.keywordPlacement.bodyContent)}
+                                                    <div style="margin-bottom: 16px;">
+                                                        <div style="font-weight: 600; color: #78350f; margin-bottom: 8px; font-size: 15px;">キーワード配置戦略</div>
+                                                        <div style="font-size: 14px; color: #78350f; line-height: 1.9;">
+                                                            • <strong>Title:</strong> ${escapeHtml(change.detailedAnalysis.seoStrategy.keywordPlacement.titleTag)}<br><br>
+                                                            • <strong>Meta Description:</strong> ${escapeHtml(change.detailedAnalysis.seoStrategy.keywordPlacement.metaDescription)}<br><br>
+                                                            • <strong>H1:</strong> ${escapeHtml(change.detailedAnalysis.seoStrategy.keywordPlacement.h1Tag)}<br><br>
+                                                            • <strong>Body:</strong> ${escapeHtml(change.detailedAnalysis.seoStrategy.keywordPlacement.bodyContent)}
                                                         </div>
                                                     </div>
 
-                                                    <div style="background: white; padding: 10px; border-radius: 4px;">
-                                                        <div style="font-weight: 600; color: #92400e; margin-bottom: 5px; font-size: 13px;">期待される効果</div>
-                                                        <div style="font-size: 12px; color: #78350f;">${escapeHtml(change.detailedAnalysis.seoStrategy.expectedImpact)}</div>
+                                                    <div style="background: white; padding: 15px; border-radius: 6px;">
+                                                        <div style="font-weight: 600; color: #92400e; margin-bottom: 8px; font-size: 15px;">期待される効果</div>
+                                                        <div style="font-size: 14px; color: #78350f; line-height: 1.8;">${escapeHtml(change.detailedAnalysis.seoStrategy.expectedImpact)}</div>
                                                     </div>
 
                                                     ${change.detailedAnalysis.technicalDetails ? `
@@ -832,97 +832,97 @@
                                             ` : ''}
 
                                             ${change.detailedAnalysis.adPlatforms ? `
-                                                <div style="background: #f5f3ff; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #8b5cf6;">
-                                                    <div style="font-weight: 700; color: #5b21b6; margin-bottom: 10px; font-size: 15px;">📺 広告プラットフォーム別戦略</div>
+                                                <div style="background: #f5f3ff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #8b5cf6; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                    <div style="font-weight: 700; color: #5b21b6; margin-bottom: 15px; font-size: 17px;">📺 広告プラットフォーム別戦略</div>
 
                                                     ${change.detailedAnalysis.adPlatforms.googleSearch ? `
-                                                        <div style="background: white; padding: 12px; border-radius: 4px; margin-bottom: 10px;">
-                                                            <div style="font-weight: 600; color: #5b21b6; margin-bottom: 8px; font-size: 13px;">🔎 Google検索広告</div>
-                                                            <div style="font-size: 12px; color: #6b21a8; line-height: 1.6;">
-                                                                • 予算: ${escapeHtml(change.detailedAnalysis.adPlatforms.googleSearch.budget)}<br>
-                                                                • ターゲットKW: ${change.detailedAnalysis.adPlatforms.googleSearch.targetKeywords.join(', ')}<br>
-                                                                • 広告文: ${escapeHtml(change.detailedAnalysis.adPlatforms.googleSearch.adCopy)}<br>
-                                                                • CTR目標: ${escapeHtml(change.detailedAnalysis.adPlatforms.googleSearch.ctr)}
+                                                        <div style="background: white; padding: 16px; border-radius: 6px; margin-bottom: 12px;">
+                                                            <div style="font-weight: 600; color: #5b21b6; margin-bottom: 10px; font-size: 15px;">🔎 Google検索広告</div>
+                                                            <div style="font-size: 14px; color: #6b21a8; line-height: 1.9;">
+                                                                • <strong>予算:</strong> ${escapeHtml(change.detailedAnalysis.adPlatforms.googleSearch.budget)}<br><br>
+                                                                • <strong>ターゲットKW:</strong> ${change.detailedAnalysis.adPlatforms.googleSearch.targetKeywords.join(', ')}<br><br>
+                                                                • <strong>広告文:</strong> ${escapeHtml(change.detailedAnalysis.adPlatforms.googleSearch.adCopy)}<br><br>
+                                                                • <strong>CTR目標:</strong> ${escapeHtml(change.detailedAnalysis.adPlatforms.googleSearch.ctr)}
                                                             </div>
                                                         </div>
                                                     ` : ''}
 
                                                     ${change.detailedAnalysis.adPlatforms.googleDisplay ? `
-                                                        <div style="background: white; padding: 12px; border-radius: 4px; margin-bottom: 10px;">
-                                                            <div style="font-weight: 600; color: #5b21b6; margin-bottom: 8px; font-size: 13px;">🎨 Googleディスプレイ広告</div>
-                                                            <div style="font-size: 12px; color: #6b21a8; line-height: 1.6;">
-                                                                • 予算: ${escapeHtml(change.detailedAnalysis.adPlatforms.googleDisplay.budget)}<br>
-                                                                • ターゲティング: ${escapeHtml(change.detailedAnalysis.adPlatforms.googleDisplay.targeting)}<br>
-                                                                • クリエイティブ: ${escapeHtml(change.detailedAnalysis.adPlatforms.googleDisplay.creative)}
+                                                        <div style="background: white; padding: 16px; border-radius: 6px; margin-bottom: 12px;">
+                                                            <div style="font-weight: 600; color: #5b21b6; margin-bottom: 10px; font-size: 15px;">🎨 Googleディスプレイ広告</div>
+                                                            <div style="font-size: 14px; color: #6b21a8; line-height: 1.9;">
+                                                                • <strong>予算:</strong> ${escapeHtml(change.detailedAnalysis.adPlatforms.googleDisplay.budget)}<br><br>
+                                                                • <strong>ターゲティング:</strong> ${escapeHtml(change.detailedAnalysis.adPlatforms.googleDisplay.targeting)}<br><br>
+                                                                • <strong>クリエイティブ:</strong> ${escapeHtml(change.detailedAnalysis.adPlatforms.googleDisplay.creative)}
                                                             </div>
                                                         </div>
                                                     ` : ''}
 
                                                     ${change.detailedAnalysis.adPlatforms.youtube ? `
-                                                        <div style="background: white; padding: 12px; border-radius: 4px;">
-                                                            <div style="font-weight: 600; color: #5b21b6; margin-bottom: 8px; font-size: 13px;">▶️ YouTube広告</div>
-                                                            <div style="font-size: 12px; color: #6b21a8; line-height: 1.6;">
-                                                                • 予算: ${escapeHtml(change.detailedAnalysis.adPlatforms.youtube.budget)}<br>
-                                                                • 動画尺: ${escapeHtml(change.detailedAnalysis.adPlatforms.youtube.videoLength)}<br>
-                                                                • 訴求内容: ${escapeHtml(change.detailedAnalysis.adPlatforms.youtube.message)}
+                                                        <div style="background: white; padding: 16px; border-radius: 6px;">
+                                                            <div style="font-weight: 600; color: #5b21b6; margin-bottom: 10px; font-size: 15px;">▶️ YouTube広告</div>
+                                                            <div style="font-size: 14px; color: #6b21a8; line-height: 1.9;">
+                                                                • <strong>予算:</strong> ${escapeHtml(change.detailedAnalysis.adPlatforms.youtube.budget)}<br><br>
+                                                                • <strong>動画尺:</strong> ${escapeHtml(change.detailedAnalysis.adPlatforms.youtube.videoLength)}<br><br>
+                                                                • <strong>訴求内容:</strong> ${escapeHtml(change.detailedAnalysis.adPlatforms.youtube.message)}
                                                             </div>
                                                         </div>
                                                     ` : ''}
                                                 </div>
                                             ` : ''}
 
-                                            <div style="background: #ecfdf5; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #10b981;">
-                                                <div style="font-weight: 700; color: #047857; margin-bottom: 10px; font-size: 15px;">💼 ビジネスインパクト</div>
-                                                <div style="color: #065f46; font-size: 13px; line-height: 1.7;">${escapeHtml(change.detailedAnalysis.businessImpact)}</div>
+                                            <div style="background: #ecfdf5; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #10b981; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                <div style="font-weight: 700; color: #047857; margin-bottom: 12px; font-size: 17px;">💼 ビジネスインパクト</div>
+                                                <div style="color: #065f46; font-size: 15px; line-height: 1.9;">${escapeHtml(change.detailedAnalysis.businessImpact)}</div>
                                             </div>
 
                                             ${change.detailedAnalysis.targetAudience ? `
-                                                <div style="background: #eff6ff; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #3b82f6;">
-                                                    <div style="font-weight: 700; color: #1e40af; margin-bottom: 10px; font-size: 15px;">🎯 ターゲット層</div>
-                                                    <div style="color: #1e3a8a; font-size: 13px;">${escapeHtml(change.detailedAnalysis.targetAudience)}</div>
+                                                <div style="background: #eff6ff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #3b82f6; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                    <div style="font-weight: 700; color: #1e40af; margin-bottom: 12px; font-size: 17px;">🎯 ターゲット層</div>
+                                                    <div style="color: #1e3a8a; font-size: 15px; line-height: 1.9;">${escapeHtml(change.detailedAnalysis.targetAudience)}</div>
                                                 </div>
                                             ` : ''}
 
                                             ${change.detailedAnalysis.reasoning ? `
-                                                <div style="background: #fefce8; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #eab308;">
-                                                    <div style="font-weight: 700; color: #a16207; margin-bottom: 10px; font-size: 15px;">🧠 考察の根拠</div>
+                                                <div style="background: #fefce8; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #eab308; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                    <div style="font-weight: 700; color: #a16207; margin-bottom: 15px; font-size: 17px;">🧠 考察の根拠</div>
                                                     ${Object.entries(change.detailedAnalysis.reasoning).map(([key, value]) => `
-                                                        <div style="margin-bottom: 12px; background: white; padding: 10px; border-radius: 4px;">
-                                                            <div style="font-weight: 600; color: #854d0e; margin-bottom: 5px; font-size: 12px; text-transform: uppercase;">
+                                                        <div style="margin-bottom: 16px; background: white; padding: 15px; border-radius: 6px;">
+                                                            <div style="font-weight: 600; color: #854d0e; margin-bottom: 8px; font-size: 14px;">
                                                                 ${key === 'marketPosition' ? '📊 市場ポジション分析' :
                                                                   key === 'messagingStrategy' ? '💬 メッセージング戦略' :
                                                                   key === 'targetInsight' ? '🎯 ターゲット洞察' :
                                                                   key === 'competitiveAnalysis' ? '⚔️ 競合比較' : key}
                                                             </div>
-                                                            <div style="color: #78350f; font-size: 12px; line-height: 1.7;">${escapeHtml(value)}</div>
+                                                            <div style="color: #78350f; font-size: 14px; line-height: 1.9;">${escapeHtml(value)}</div>
                                                         </div>
                                                     `).join('')}
                                                 </div>
                                             ` : ''}
 
-                                            <div style="background: #fef2f2; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #ef4444;">
-                                                <div style="font-weight: 700; color: #dc2626; margin-bottom: 10px; font-size: 15px;">⚔️ 競合状況分析</div>
-                                                <div style="color: #991b1b; font-size: 13px; line-height: 1.7;">${escapeHtml(change.detailedAnalysis.competitiveContext)}</div>
+                                            <div style="background: #fef2f2; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ef4444; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                <div style="font-weight: 700; color: #dc2626; margin-bottom: 12px; font-size: 17px;">⚔️ 競合状況分析</div>
+                                                <div style="color: #991b1b; font-size: 15px; line-height: 1.9;">${escapeHtml(change.detailedAnalysis.competitiveContext)}</div>
                                             </div>
 
                                             ${change.detailedAnalysis.estimatedBudget ? `
-                                                <div style="background: #faf5ff; padding: 15px; border-radius: 6px; border-left: 3px solid #a855f7;">
-                                                    <div style="font-weight: 700; color: #7e22ce; margin-bottom: 10px; font-size: 15px;">💰 推定投資額</div>
-                                                    <div style="color: #6b21a8; font-size: 13px;">${escapeHtml(change.detailedAnalysis.estimatedBudget)}</div>
+                                                <div style="background: #faf5ff; padding: 20px; border-radius: 8px; border-left: 4px solid #a855f7; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                    <div style="font-weight: 700; color: #7e22ce; margin-bottom: 12px; font-size: 17px;">💰 推定投資額</div>
+                                                    <div style="color: #6b21a8; font-size: 15px; line-height: 1.8;">${escapeHtml(change.detailedAnalysis.estimatedBudget)}</div>
                                                 </div>
                                             ` : ''}
 
                                             ${change.detailedAnalysis.roi ? `
-                                                <div style="background: #faf5ff; padding: 15px; border-radius: 6px; margin-top: 10px; border-left: 3px solid #a855f7;">
-                                                    <div style="font-weight: 700; color: #7e22ce; margin-bottom: 10px; font-size: 15px;">📊 ROI目標</div>
-                                                    <div style="color: #6b21a8; font-size: 13px;">${escapeHtml(change.detailedAnalysis.roi)}</div>
+                                                <div style="background: #faf5ff; padding: 20px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #a855f7; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                    <div style="font-weight: 700; color: #7e22ce; margin-bottom: 12px; font-size: 17px;">📊 ROI目標</div>
+                                                    <div style="color: #6b21a8; font-size: 15px; line-height: 1.8;">${escapeHtml(change.detailedAnalysis.roi)}</div>
                                                 </div>
                                             ` : ''}
 
                                             ${change.detailedAnalysis.metrics ? `
-                                                <div style="background: #f0fdfa; padding: 15px; border-radius: 6px; margin-top: 10px; border-left: 3px solid #14b8a6;">
-                                                    <div style="font-weight: 700; color: #0f766e; margin-bottom: 10px; font-size: 15px;">📈 定量指標</div>
-                                                    <div style="font-size: 12px; color: #115e59; line-height: 1.6;">
+                                                <div style="background: #f0fdfa; padding: 20px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #14b8a6; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                    <div style="font-weight: 700; color: #0f766e; margin-bottom: 12px; font-size: 17px;">📈 定量指標</div>
+                                                    <div style="font-size: 14px; color: #115e59; line-height: 1.8;">
                                                         ${Object.entries(change.detailedAnalysis.metrics).map(([key, value]) =>
                                                             `• ${key}: ${escapeHtml(value)}`
                                                         ).join('<br>')}
@@ -955,73 +955,6 @@
                     </div>
                 ` : ''}
 
-                <!-- テキスト変更比較 -->
-                ${(selectedCompany.current_title || selectedCompany.previous_title ||
-                   selectedCompany.current_description || selectedCompany.previous_description ||
-                   selectedCompany.current_content || selectedCompany.previous_content) ? `
-                    <div style="margin-top: 30px;">
-                        <h3 style="margin-bottom: 15px; color: #1e293b; font-weight: 600;">📝 テキスト変更比較</h3>
-                        <div class="comparison-view">
-                            <div class="comparison-card current">
-                                <div class="comparison-header current">変更後のテキスト</div>
-                                <div class="comparison-content">
-                                    ${selectedCompany.current_title ? `
-                                        <div class="comparison-item">
-                                            <div class="comparison-label">タイトル</div>
-                                            <div class="comparison-text">${escapeHtml(selectedCompany.current_title)}</div>
-                                        </div>
-                                    ` : ''}
-                                    ${selectedCompany.current_description ? `
-                                        <div class="comparison-item">
-                                            <div class="comparison-label">説明文</div>
-                                            <div class="comparison-text">${escapeHtml(selectedCompany.current_description)}</div>
-                                        </div>
-                                    ` : ''}
-                                    ${selectedCompany.current_content ? `
-                                        <div class="comparison-item">
-                                            <div class="comparison-label">メインコンテンツ</div>
-                                            <div class="comparison-text">${escapeHtml(selectedCompany.current_content)}</div>
-                                        </div>
-                                    ` : ''}
-                                    ${!selectedCompany.current_title && !selectedCompany.current_description && !selectedCompany.current_content ? `
-                                        <div style="text-align: center; padding: 20px; color: #64748b;">
-                                            変更後のデータがありません
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-
-                            <div class="comparison-card previous">
-                                <div class="comparison-header previous">変更前のテキスト</div>
-                                <div class="comparison-content">
-                                    ${selectedCompany.previous_title ? `
-                                        <div class="comparison-item">
-                                            <div class="comparison-label">タイトル</div>
-                                            <div class="comparison-text">${escapeHtml(selectedCompany.previous_title)}</div>
-                                        </div>
-                                    ` : ''}
-                                    ${selectedCompany.previous_description ? `
-                                        <div class="comparison-item">
-                                            <div class="comparison-label">説明文</div>
-                                            <div class="comparison-text">${escapeHtml(selectedCompany.previous_description)}</div>
-                                        </div>
-                                    ` : ''}
-                                    ${selectedCompany.previous_content ? `
-                                        <div class="comparison-item">
-                                            <div class="comparison-label">メインコンテンツ</div>
-                                            <div class="comparison-text">${escapeHtml(selectedCompany.previous_content)}</div>
-                                        </div>
-                                    ` : ''}
-                                    ${!selectedCompany.previous_title && !selectedCompany.previous_description && !selectedCompany.previous_content ? `
-                                        <div style="text-align: center; padding: 20px; color: #64748b;">
-                                            変更前のデータがありません
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ` : ''}
             `;
 
             section.style.display = 'block';
